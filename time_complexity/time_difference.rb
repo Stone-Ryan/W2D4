@@ -122,17 +122,40 @@ def two_sum_brute(arr, target) #n^2
   false
 end
 
-def okay_to_sum?(arr, target)
+def okay_to_sum?(arr, target) #nlogn
   sorted = arr.sort
+  i, j = 0, sorted.length - 1
 
-
+  while i < j
+    case (sorted[i] + sorted[j]) <=> target
+    when -1
+      i += 1
+    when 0
+      return true
+    when 1
+      j -= 1
+    end
+  end
+  false
 end
 
-def two_sum_hash(arr, target)
+def two_sum_hash?(arr, target)#n
   hash = Hash.new(false)
   arr.each do |el|
     return true if hash[target - el]
     hash[el] = true
   end
   false
+end
+
+def windows(arr, w) #n^2?
+  curr_max = arr[0]
+  (0..arr.length - w).each do |i|
+    subarr = arr[i...(i + w)]
+    window = subarr.max - subarr.min
+    if window > curr_max
+      curr_max = window
+    end
+  end
+  curr_max
 end
