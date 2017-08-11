@@ -84,7 +84,7 @@ def first_anagram?(string, string2)
   result.include?(string2)
 end
 
-def second_anagram?(str1, str2)
+def second_anagram?(str1, str2) #n^2
   arr1 = str1.chars
   arr2 = str2.chars
   arr1.each_index do |i|
@@ -102,4 +102,37 @@ end
 
 def third_anagram?(str1, str2) #linearithmic
   str1.chars.sort == str2.chars.sort
+end
+
+def fourth_anagram?(str1, str2)
+  hash1 = Hash.new(0)
+  hash2 = Hash.new(0)
+  str1.chars.each {|ch| hash1[ch] += 1}
+  str2.chars.each {|ch| hash2[ch] += 1}
+  hash1 == hash2
+end
+
+def two_sum_brute(arr, target) #n^2
+  arr.each_index do |i|
+    arr.each_index do |j|
+      next if i == j
+      return true if arr[i] + arr[j] == target
+    end
+  end
+  false
+end
+
+def okay_to_sum?(arr, target)
+  sorted = arr.sort
+
+
+end
+
+def two_sum_hash(arr, target)
+  hash = Hash.new(false)
+  arr.each do |el|
+    return true if hash[target - el]
+    hash[el] = true
+  end
+  false
 end
